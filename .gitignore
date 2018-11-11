@@ -1,0 +1,6 @@
+# Dependencies are installed manually or using a build process, so they
+# can benefit from machine-specific compiling, etc.
+node_modules
+
+# The build output is compiled locally as the source code changes.
+.next

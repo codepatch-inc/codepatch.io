@@ -1,0 +1,21 @@
+{
+    "name": "codepatch.io",
+    "version": "0.0.1",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "dev": "NODE_ENV=development node index.js",
+        "build": "next build",
+        "start": "next start",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": "Seth Holladay <me@seth-holladay.com> (https://seth-holladay.com)",
+    "license": "MPL-2.0",
+    "dependencies": {
+        "hapi": "^17.5.4",
+        "next": "^6.1.1",
+        "react": "^16.4.2",
+        "react-dom": "^16.4.2"
+    }
+}
