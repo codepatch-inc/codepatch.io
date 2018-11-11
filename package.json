@@ -7,7 +7,7 @@
         "dev": "NODE_ENV=development node cli.js",
         "build": "next build",
         "start": "NODE_ENV=production node cli.js",
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "test": "xo"
     },
     "keywords": [],
     "author": "Seth Holladay <me@seth-holladay.com> (https://seth-holladay.com)",
@@ -17,5 +17,17 @@
         "next": "^6.1.1",
         "react": "^16.4.2",
         "react-dom": "^16.4.2"
+    },
+    "devDependencies": {
+        "eslint-config-tidy": "^0.6.4",
+        "eslint-config-tidy-react": "^0.3.1",
+        "eslint-plugin-react": "^7.11.1",
+        "xo": "^0.23.0"
+    },
+    "xo": {
+        "extend": [
+            "tidy",
+            "tidy-react"
+        ]
     }
 }

@@ -1,7 +1,7 @@
 'use strict';
 
-const hapi = require('hapi')
-const next = require('next')
+const hapi = require('hapi');
+const next = require('next');
 
 const app = next({ dev : process.env.NODE_ENV === 'development' });
 const handle = app.getRequestHandler();
@@ -23,7 +23,11 @@ server.route({
     method  : 'GET',
     path    : '/blog/{postId}',
     async handler({ raw, query, params }) {
-        return app.renderToHTML(raw.req, raw.res, '/post', { ...query, ...params, id : params.postId });
+        return app.renderToHTML(raw.req, raw.res, '/post', {
+            ...query,
+            ...params,
+            id : params.postId
+        });
     }
 });
 server.route({
@@ -34,10 +38,11 @@ server.route({
     }
 });
 
-app.prepare().then(() => {
-    return server.start();
-})
-.catch((error) => {
-    console.error(error.stack);
-    process.exit(1);
-});
+app.prepare()
+    .then(() => {
+        return server.start();
+    })
+    .catch((error) => {
+        console.error(error.stack);
+        process.exit(1);
+    });
