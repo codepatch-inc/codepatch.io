@@ -1,48 +1,53 @@
+#!/usr/bin/env node
+
 'use strict';
 
-const hapi = require('hapi');
-const next = require('next');
+require('throw-rejects')();
 
-const app = next({ dev : process.env.NODE_ENV === 'development' });
-const handle = app.getRequestHandler();
+const { bold } = require('chalk');
+const open = require('opn');
+const rootCheck = require('root-check');
+const handleQuit = require('handle-quit');
+const cli = require('meow')(`
+    Usage
+      $ codepatch
 
-const server = hapi.server({
-    host : 'localhost',
-    port : 3000
-});
+    Option
+      --port        Port number to listen on for HTTPS requests
+      --open        Open the homepage in your browser
+      --open=<url>  Open a specific page in your browser
 
-server.route({
-    method  : 'GET',
-    path    : '/_next/{anything*}',
-    async handler({ raw, url }, h) {
-        await handle(raw.req, raw.res, url);
-        return h.close;
-    }
-});
-server.route({
-    method  : 'GET',
-    path    : '/blog/{postId}',
-    async handler({ raw, query, params }) {
-        return app.renderToHTML(raw.req, raw.res, '/post', {
-            ...query,
-            ...params,
-            id : params.postId
-        });
-    }
-});
-server.route({
-    method : 'GET',
-    path   : '/{anything*}',
-    async handler({ raw, path, query }) {
-        return app.renderToHTML(raw.req, raw.res, path, query);
-    }
-});
+    Example
+      $ codepatch
+      ${bold.cyan('Codepatch ready')} ${bold.grey('at')} ${bold.yellow('http://localhost:3000')}
+      $ codepatch --port=7000
+      ${bold.cyan('Codepatch ready')} ${bold.grey('at')} ${bold.yellow('http://localhost:7000')}
+`);
 
-app.prepare()
-    .then(() => {
-        return server.start();
-    })
-    .catch((error) => {
-        console.error(error.stack);
-        process.exit(1);
+const server = require('.');
+
+const serverOption = { ...cli.flags };
+delete serverOption.open;
+
+server(serverOption).then(async (app) => {
+    handleQuit(() => {
+        app.stop();
     });
+
+    await app.start();
+
+    // Attempt to set UID to a normal user now that we definitely
+    // do not need elevated privileges.
+    rootCheck();
+
+    console.log(
+        bold.cyan('Codepatch ready'),
+        bold.grey('at'),
+        bold.yellow(app.info.uri)
+    );
+
+    const page = cli.flags.open;
+    if (page) {
+        open(app.info.uri + '/' + (page === true ? '' : page));
+    }
+});

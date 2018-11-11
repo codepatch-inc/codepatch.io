@@ -1,10 +1,10 @@
 import Layout from '../layout/website';
 import Link from 'next/link';
 
-const PostLink = (props) => (
+const PostLink = ({ post }) => (
     <li>
-        <Link as={`/blog/${props.id}`} href={`/post?id=${props.id}`}>
-            <a>{props.title}</a>
+        <Link as={`/blog/${post.id}`} href={`/post?id=${post.id}`}>
+            <a>{post.title}</a>
         </Link>
     </li>
 );
@@ -13,7 +13,7 @@ const Blog = (props) => (
         <h1>Codepatch Blog</h1>
         <ul>
             {props.posts.map((post) => {
-                return <PostLink id={post.id} key={post.id} title={post.title} />
+                return <PostLink key={post.id} post={post} />
             })}
         </ul>
         <style jsx>{`
@@ -53,10 +53,8 @@ Blog.getInitialProps = async () => {
             title : 'Creating a Cutting Edge App'
         }
     ];
-    console.log('returning posts');
-    return {
-        posts
-    };
+    
+    return { posts };
 };
 
 export default Blog;

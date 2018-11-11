@@ -13,10 +13,18 @@
     "author": "Seth Holladay <me@seth-holladay.com> (https://seth-holladay.com)",
     "license": "MPL-2.0",
     "dependencies": {
+        "chalk": "^2.4.1",
+        "handle-quit": "^0.1.1",
         "hapi": "^17.5.4",
+        "joi": "^14.0.5",
+        "meow": "^5.0.0",
         "next": "^6.1.1",
+        "opn": "^5.4.0",
+        "port-type": "^0.2.1",
         "react": "^16.4.2",
-        "react-dom": "^16.4.2"
+        "react-dom": "^16.4.2",
+        "root-check": "^1.0.0",
+        "throw-rejects": "^1.0.0"
     },
     "devDependencies": {
         "eslint-config-tidy": "^0.6.4",
