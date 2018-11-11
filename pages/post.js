@@ -1,4 +1,3 @@
-import { withRouter } from 'next/router'
 import Layout from '../layout/website.js'
 
 const Post = (props) => (
