@@ -6,35 +6,23 @@ const PostLink = ({ post }) => (
         <Link as={`/blog/${post.id}`} href={`/post?id=${post.id}`}>
             <a>{post.title}</a>
         </Link>
+        <style jsx>{`
+            li {
+                list-style: none;
+                margin: 0.5rem 0;
+            }
+        `}</style>
     </li>
 );
 const Blog = (props) => (
     <Layout>
-        <h1>Codepatch Blog</h1>
+        <h1>Blog</h1>
+        <p>News and articles from our trainers and students</p>
         <ul>
             {props.posts.map((post) => {
                 return <PostLink key={post.id} post={post} />
             })}
         </ul>
-        <style jsx>{`
-            h1, a {
-                font-family: "Lato", sans-serif;
-            }
-            ul {
-                padding: 0;
-                list-style: none;
-            }
-            li {
-                margin: 200px 0;
-            }
-            a {
-                text-decoration: none;
-                color: blue;
-            }
-            a:hover {
-                opacity: 0.6;
-            }
-        `}</style>
     </Layout>
 );
 Blog.getInitialProps = async () => {
@@ -53,7 +41,7 @@ Blog.getInitialProps = async () => {
             title : 'Creating a Cutting Edge App'
         }
     ];
-    
+
     return { posts };
 };
 
