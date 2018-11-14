@@ -2,8 +2,10 @@ import Layout from '../layout/website';
 
 const Index = () => (
     <Layout>
-        <h1>Codepatch School</h1>
-        <p>Learning to code, one patch at a time</p>
+        <h1>Codepatch</h1>
+        <p>Developer training and consulting</p>
+        <p>We make it easy to build apps by teaching you to code or training you on the best tools for your new project.</p>
+        <p>Any skill level, from basic to advanced. We will help you make your idea a reality. </p>
     </Layout>
 );
 
