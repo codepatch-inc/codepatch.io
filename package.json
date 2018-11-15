@@ -24,6 +24,7 @@
         "react": "^16.4.2",
         "react-dom": "^16.4.2",
         "root-check": "^1.0.0",
+        "semantic-ui-react": "^0.83.0",
         "throw-rejects": "^1.0.0"
     },
     "devDependencies": {

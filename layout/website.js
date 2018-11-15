@@ -2,11 +2,12 @@ import Head from 'next/head';
 import Header from '../component/header';
 
 const Layout = (props) => (
-    <div>
+    <>
         <Head>
             <title>Codepatch - Where developers grow</title>
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/6.0.0/sanitize.min.css" />
             <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700" />
+            <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/semantic-ui@2.4.0/dist/semantic.min.css" />
         </Head>
         <Header />
         {props.children}
@@ -34,7 +35,7 @@ const Layout = (props) => (
                 opacity: 0.6;
             }
         `}</style>
-    </div>
+    </>
 );
 
 export default Layout;
