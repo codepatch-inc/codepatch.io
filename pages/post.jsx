@@ -1,4 +1,4 @@
-import Layout from '../layout/website.js'
+import Layout from '../layout/website.jsx';
 
 const Post = (props) => (
     <Layout>

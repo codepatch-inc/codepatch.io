@@ -1,6 +1,6 @@
 import Link from 'next/link';
-import { Component } from 'react'
-import { Menu } from 'semantic-ui-react'
+import { Component } from 'react';
+import { Menu } from 'semantic-ui-react';
 
 const pages = [
     'home',
@@ -11,7 +11,7 @@ const pages = [
 ];
 
 class NavBar extends Component {
-    state = { activeItem : 'home' }
+    state = { activeItem : 'home' };
     handleItemClick = (e, { name }) => {
         this.setState({ activeItem: name });
     }

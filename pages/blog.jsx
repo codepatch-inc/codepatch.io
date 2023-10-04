@@ -1,5 +1,5 @@
-import Layout from '../layout/website';
 import Link from 'next/link';
+import Layout from '../layout/website.jsx';
 
 const PostLink = ({ post }) => (
     <li>

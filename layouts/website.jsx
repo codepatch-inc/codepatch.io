@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import Header from '../component/header';
+import Header from '../components/header.jsx';
 
 const Layout = (props) => (
     <>

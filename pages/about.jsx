@@ -1,4 +1,4 @@
-import Layout from '../layout/website'
+import Layout from '../layout/website.jsx'
 
 const About = () => (
     <Layout>

@@ -1,14 +1,15 @@
 #!/usr/bin/env node
 
-'use strict';
+import 'throw-rejects/register.js';
+import chalk from 'chalk';
+import open from 'open';
+import rootCheck from 'root-check';
+import handleQuit from 'handle-quit';
+import meow from 'meow';
+import server from './index.js';
 
-require('throw-rejects')();
-
-const { bold } = require('chalk');
-const open = require('opn');
-const rootCheck = require('root-check');
-const handleQuit = require('handle-quit');
-const cli = require('meow')(`
+const { bold } = chalk;
+const cli = meow(`
     Usage
       $ codepatch
 
@@ -19,35 +20,35 @@ const cli = require('meow')(`
 
     Example
       $ codepatch
-      ${bold.cyan('Codepatch ready')} ${bold.grey('at')} ${bold.yellow('http://localhost:3000')}
+      ${bold.cyan('CodePatch ready')} ${bold.grey('at')} ${bold.yellow('http://localhost:3000')}
       $ codepatch --port=7000
-      ${bold.cyan('Codepatch ready')} ${bold.grey('at')} ${bold.yellow('http://localhost:7000')}
-`);
-
-const server = require('.');
+      ${bold.cyan('CodePatch ready')} ${bold.grey('at')} ${bold.yellow('http://localhost:7000')}
+`, {
+    importMeta : import.meta
+});
 
 const serverOption = { ...cli.flags };
 delete serverOption.open;
 
-server(serverOption).then(async (app) => {
-    handleQuit(() => {
-        app.stop();
-    });
+const app = await server(serverOption);
 
-    await app.start();
-
-    // Attempt to set UID to a normal user now that we definitely
-    // do not need elevated privileges.
-    rootCheck();
-
-    console.log(
-        bold.cyan('Codepatch ready'),
-        bold.grey('at'),
-        bold.yellow(app.info.uri)
-    );
-
-    const page = cli.flags.open;
-    if (page) {
-        open(app.info.uri + '/' + (page === true ? '' : page));
-    }
+handleQuit(() => {
+    app.stop();
 });
+
+await app.start();
+
+// Attempt to set UID to a normal user now that we definitely
+// do not need elevated privileges.
+rootCheck();
+
+console.log(
+    bold.cyan('CodePatch ready'),
+    bold.grey('at'),
+    bold.yellow(app.info.uri)
+);
+
+const page = cli.flags.open;
+if (page) {
+    open(app.info.uri + '/' + (page === true ? '' : page));
+}

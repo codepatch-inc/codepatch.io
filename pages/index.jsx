@@ -1,4 +1,4 @@
-import Layout from '../layout/website';
+import Layout from '../layouts/website.jsx';
 
 const Index = () => (
     <Layout>
