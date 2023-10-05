@@ -1,17 +1,20 @@
-import Layout from '../layout/website.jsx';
+import React from 'react';
+import Layout from '../layouts/website.jsx';
 
-const Post = (props) => (
-    <Layout>
-         <h1>{props.post.title}</h1>
-         <p>This is the blog post content.</p>
-    </Layout>
-);
+const Post = (props) => {
+    return (
+        <Layout>
+            <h1>{props.post.title}</h1>
+            <p>This is the blog post content.</p>
+        </Layout>
+    );
+};
 Post.getInitialProps = async (context) => {
     // Could fetch data from database here:
-    const { id } = context.query
+    const { id } = context.query;
     const postMap = new Map([
         ['intro', {
-            title : 'Introducing Codepatch'
+            title : 'Introducing CodePatch'
         }],
         ['new-courses', {
             title : 'Our New Courses'
@@ -22,8 +25,8 @@ Post.getInitialProps = async (context) => {
     ]);
 
     const post = postMap.get(id);
-    console.log('post:', post);
+
     return { post };
 };
 
-export default Post
+export default Post;

@@ -1,36 +1,36 @@
+import React from 'react';
 import Link from 'next/link';
-import Layout from '../layout/website.jsx';
+import Layout from '../layouts/website.jsx';
 
-const PostLink = ({ post }) => (
-    <li>
-        <Link as={`/blog/${post.id}`} href={`/post?id=${post.id}`}>
-            <a>{post.title}</a>
-        </Link>
-        <style jsx>{`
-            li {
-                list-style: none;
-                margin: 0.5rem 0;
-            }
-        `}</style>
-    </li>
-);
-const Blog = (props) => (
-    <Layout>
-        <h1>Blog</h1>
-        <p>News and articles from our trainers and students</p>
-        <ul>
-            {props.posts.map((post) => {
-                return <PostLink key={post.id} post={post} />
-            })}
-        </ul>
-    </Layout>
-);
+const PostLink = ({ post }) => {
+    return (
+        <li>
+            <Link as={`/blog/${post.id}`} href={`/post?id=${post.id}`}>
+                {post.title}
+            </Link>
+        </li>
+    );
+};
+const Blog = (props) => {
+    return (
+        <Layout>
+            <h1>Blog</h1>
+            <p>News and articles from our trainers and students</p>
+            <ul>
+                {props.posts.map((post) => {
+                    return <PostLink key={post.id} post={post} />;
+                })}
+            </ul>
+        </Layout>
+    );
+};
+
 Blog.getInitialProps = async () => {
     // Could fetch data from database here:
     const posts = [
         {
             id    : 'intro',
-            title : 'Introducing Codepatch'
+            title : 'Introducing CodePatch'
         },
         {
             id    : 'new-courses',

@@ -1,6 +1,7 @@
 import Link from 'next/link';
-import { Component } from 'react';
-import { Menu } from 'semantic-ui-react';
+import React from 'react';
+import { useRouter } from 'next/router';
+import { Container, Menu, Segment } from 'semantic-ui-react';
 
 const pages = [
     'home',
@@ -10,34 +11,34 @@ const pages = [
     'blog'
 ];
 
-class NavBar extends Component {
-    state = { activeItem : 'home' };
-    handleItemClick = (e, { name }) => {
-        this.setState({ activeItem: name });
-    }
-    render() {
-        const { activeItem } = this.state
-        const items = pages.map((pageName) => {
-            return (
-                <Link key={pageName} href={pageName === 'home' ? '/' : pageName}><a><Menu.Item
-                    name={pageName}
-                    active={activeItem === pageName}
-                    onClick={this.handleItemClick}
-                /></a></Link>
-            );
-        });
-        return (
-            <Menu pointing secondary>
-                {items}
-            </Menu>
-        );
-    }
-}
+const Header = (props) => {
+    const router = useRouter();
+    const activePage = router.pathname.split('/')[1] || 'home';
 
-const Header = () => (
-    <header>
-        <NavBar />
-    </header>
-);
+    const items = pages.map((pageName) => {
+        return {
+            as     : Link,
+            key    : pageName,
+            active : pageName === activePage,
+            href   : pageName === 'home' ? '/' : pageName,
+            name   : pageName
+        };
+    });
+
+    return (
+        <Segment basic inverted padded="vertical" as="header">
+            <Container>
+                <Menu
+                    inverted
+                    pointing
+                    secondary
+                    as="nav"
+                    items={items}
+                />
+            </Container>
+            {props.banner}
+        </Segment>
+    );
+};
 
 export default Header;

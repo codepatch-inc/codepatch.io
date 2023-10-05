@@ -1,10 +1,13 @@
-import Layout from '../layout/website.jsx'
+import React from 'react';
+import Layout from '../layouts/website.jsx';
 
-const About = () => (
-    <Layout>
-        <h1>The Codepatch Story</h1>
-        <p>This is the about page</p>
-    </Layout>
-);
+const About = () => {
+    return (
+        <Layout>
+            <h1>The CodePatch Story</h1>
+            <p>This is the about page</p>
+        </Layout>
+    );
+};
 
 export default About;
