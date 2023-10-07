@@ -8,7 +8,7 @@ const Layout = (props) => {
         <>
             <Head>
                 <title>CodePatch - Where developers grow</title>
-                <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700" />
+                <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic" />
                 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2/dist/semantic.min.css" />
             </Head>
             <Header banner={props.banner} />
@@ -20,6 +20,17 @@ const Layout = (props) => {
                     © {(new Date()).getUTCFullYear()} CodePatch, Inc.
                 </Container>
             </Segment>
+            <style jsx global>
+                {
+                    `
+                    #__next {
+                        display: grid;
+                        grid-template-rows: auto 1fr;
+                        min-height: 100vh;
+                    }
+                    `
+                }
+            </style>
         </>
     );
 };
