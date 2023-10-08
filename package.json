@@ -17,7 +17,7 @@
         "test": "xo"
     },
     "engines": {
-        "node": ">=20"
+        "node": ">=18"
     },
     "dependencies": {
         "@hapi/hapi": "^21.3.2",
