@@ -31,17 +31,6 @@ const provision = async (option) => {
     });
     server.route({
         method : 'GET',
-        path   : '/blog/{postId}',
-        async handler({ raw, query, params }) {
-            return app.renderToHTML(raw.req, raw.res, '/post', {
-                ...query,
-                ...params,
-                id : params.postId
-            });
-        }
-    });
-    server.route({
-        method : 'GET',
         path   : '/{anything*}',
         async handler({ raw, path, query }) {
             return app.renderToHTML(raw.req, raw.res, path, query);

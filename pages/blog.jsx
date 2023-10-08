@@ -1,11 +1,13 @@
+import path from 'node:path';
 import React from 'react';
 import Link from 'next/link';
 import { Header, List } from 'semantic-ui-react';
+import { getPostFilenames, getPostById } from '../lib/api.js';
 import Layout from '../layouts/website.jsx';
 
 const PostLink = ({ post }) => {
     return (
-        <Link as={`/blog/${post.id}`} href={`/post?id=${post.id}`}>
+        <Link href={`/blog/${post.id}`}>
             {post.title}
         </Link>
     );
@@ -16,7 +18,7 @@ const Blog = (props) => {
         <Layout>
             <Header as="h1" content="Blog" />
             <p>Check back soon!</p>
-            {/* <List
+            <List
                 bulleted
                 items={props.posts.map((post) => {
                     return {
@@ -24,29 +26,24 @@ const Blog = (props) => {
                         content : <PostLink post={post} />
                     };
                 })}
-            /> */}
+            />
         </Layout>
     );
 };
 
-// Blog.getInitialProps = async () => {
-//     // Could fetch data from database here:
-//     const posts = [
-//         {
-//             id    : 'intro',
-//             title : 'Introducing CodePatch'
-//         },
-//         {
-//             id    : 'new-courses',
-//             title : 'Our New Courses'
-//         },
-//         {
-//             id    : 'advanced-react',
-//             title : 'Creating a Cutting Edge App'
-//         }
-//     ];
+export const getStaticProps = async () => {
+    const filenames = await getPostFilenames();
+    const posts = await Promise.all(filenames.map(async (filename) => {
+        const id = path.parse(filename).name;
+        const post = await getPostById(id);
+        return post;
+    }));
 
-//     return { posts };
-// };
+    return {
+        props : {
+            posts
+        }
+    };
+};
 
 export default Blog;

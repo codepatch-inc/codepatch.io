@@ -8,7 +8,8 @@ const pages = [
     'training',
     'consulting',
     'about',
-    'blog'
+    // Work in progress
+    // 'blog'
 ];
 
 const Header = (props) => {
@@ -20,7 +21,7 @@ const Header = (props) => {
             as     : Link,
             key    : pageName,
             active : pageName === activePage,
-            href   : pageName === 'home' ? '/' : pageName,
+            href   : '/' + (pageName === 'home' ? '' : pageName),
             name   : pageName
         };
     });
