@@ -14,13 +14,13 @@ const About = () => {
                     image=""
                     header="Seth Holladay"
                     meta="Lead Instructor"
-                    description="Seth is an engineer with a focus on web development and o Co-Founder of CodePatch"
+                    description="Seth is a software engineer, music producer, and a co-founder at CodePatch. He has worked on assitive technology."
                 />
                 <Card
                     image=""
                     header="Morgan Toll Hallion"
-                    meta="Assistant Instructor"
-                    description="Morgan is a sociologist and Co-Founder of CodePatch"
+                    meta="Assistant"
+                    description="Morgan is writing their first book and is a co-founder of CodePatch. They graduated from the University of Massachusetts Lowell with a degree in sociology. They have worked as a program manager in the disability services field."
                 />
             </Card.Group>
         </Layout>
